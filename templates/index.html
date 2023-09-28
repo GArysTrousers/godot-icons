@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Godot Icons</title>
+  <style>
+    :root {
+      --icon-size: 100px;
+    }
+
+    body {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      color: white;
+      background-color: black;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    div {
+      display: flex;
+    }
+
+    input[type=text] {
+      font-size: larger;
+      border-radius: 15px;
+      padding: 10px 20px;
+    }
+
+    .icon-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 1000px;
+    }
+
+    .icon>img {
+      transition: transform 0.1s ease-in-out;
+    }
+
+    .icon:hover>img {
+      transform: scale(1.1);
+    }
+
+    .icon>.name {
+      opacity: 0%;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .icon:hover>.name {
+      opacity: 100%;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .options-button {
+      background-color: black;
+      border: 2px solid white;
+      border-radius: 15px;
+      width: 50px;
+      height: 50px;
+    }
+
+    button:hover {
+      background-color: gray;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Godot Icon Search</h1>
+  <div style="justify-content: center; gap: 5px;">
+    <input id="searchBar" type="text" placeholder="Search" oninput="searchIcons()"
+      style="width: 100%; max-width: 400px;">
+    <div>
+      <button class="options-button" title="Options" onclick="toggleOptions()">
+        <img src="/icons/AnimationFilter.svg" alt="Options">
+      </button>
+    </div>
+  </div>
+  <div id="optionsMenu" class="hidden" style="justify-content: center; padding: 10px 0;">
+    <div style="flex-direction: column;">
+      <div>Icon Size</div>
+      <input id="iconSize" type="range" oninput="setIconSize()" min="3" max="10" value="10">
+    </div>
+  </div>
+  <div style="justify-content: center;">
+    <div class="icon-container">
+      {{icons}}
+    </div>
+  </div>
+
+  <script>
+    let view = {
+      root: document.querySelector(':root'),
+      searchBar: document.getElementById('searchBar'),
+      optionsMenu: document.getElementById('optionsMenu'),
+      iconSize: document.getElementById('iconSize'),
+      icons: document.getElementsByClassName('icon'),
+    }
+
+    function searchIcons(event) {
+      let query = view.searchBar.value.toLowerCase().split(' ').filter((v) => v != '')
+      console.log(query);
+      if (query.length === 0) {
+        for (const icon of view.icons) {
+          icon.classList.remove('hidden')
+        }
+      }
+      else {
+        let show = false
+        for (const icon of view.icons) {
+          show = false
+          for (const word of query) {
+            if (icon.dataset.tags.includes(word))
+              show = true
+          }
+          show ? icon.classList.remove('hidden') : icon.classList.add('hidden')
+        }
+      }
+    }
+
+    function toggleOptions() {
+      view.optionsMenu.classList.toggle('hidden')
+    }
+
+    function setIconSize() {
+      console.log(view.iconSize.value);
+      view.root.style.setProperty('--icon-size', (10 * view.iconSize.value) + 'px')
+    }
+  </script>
+</body>
+
+</html>

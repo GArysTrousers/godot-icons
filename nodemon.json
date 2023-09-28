@@ -1,0 +1,7 @@
+{
+  "ignore": [
+    "./build",
+    "./data"
+  ],
+  "ext": "js,html"
+}

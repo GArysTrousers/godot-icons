@@ -1,0 +1,13 @@
+{
+  "name": "godot-icons",
+  "version": "1.0.0",
+  "description": "A Search Page For Godot Icons",
+  "main": "main.js",
+  "scripts": {
+    "dev": "nodemon main.js",
+    "build": "node main.js"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC"
+}

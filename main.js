@@ -33,11 +33,11 @@ let page = templates.page.replace(/{{icons}}/, () => {
 })
 
 
-mkdirSync('./build/icons', { recursive: true })
-writeFileSync('./build/index.html', page)
+mkdirSync('./docs/icons', { recursive: true })
+writeFileSync('./docs/index.html', page)
 writeFileSync('./data/tags.json', JSON.stringify(icons, null, 2))
 for (const filename of iconNames) {
-  copyFileSync('./icons/' + filename, './build/icons/' + filename)
+  copyFileSync('./icons/' + filename, './docs/icons/' + filename)
 }
 
-console.log("Build Successful: ./build");
+console.log("Build Successful: ./docs");

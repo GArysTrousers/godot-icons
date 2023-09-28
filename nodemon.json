@@ -1,6 +1,7 @@
 {
   "ignore": [
     "./build",
+    "./docs",
     "./data"
   ],
   "ext": "js,html"

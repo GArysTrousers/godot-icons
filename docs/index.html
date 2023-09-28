@@ -3151,7 +3151,6 @@
 
     function searchIcons(event) {
       let query = view.searchBar.value.toLowerCase().split(' ').filter((v) => v != '')
-      console.log(query);
       if (query.length === 0) {
         for (const icon of view.icons) {
           icon.classList.remove('hidden')
